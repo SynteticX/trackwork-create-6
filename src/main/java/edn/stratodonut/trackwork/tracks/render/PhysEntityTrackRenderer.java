@@ -4,13 +4,13 @@ import edn.stratodonut.trackwork.TrackworkConfigs;
 import edn.stratodonut.trackwork.client.TrackworkPartialModels;
 import edn.stratodonut.trackwork.tracks.blocks.PhysEntityTrackBlockEntity;
 import edn.stratodonut.trackwork.tracks.blocks.TrackBaseBlock;
-import com.jozufozu.flywheel.backend.Backend;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntityRenderer;
-import com.simibubi.create.foundation.render.CachedBufferer;
-import com.simibubi.create.foundation.render.SuperByteBuffer;
-import com.simibubi.create.foundation.utility.AnimationTickHolder;
+import dev.engine_room.flywheel.api.visualization.VisualizationManager;
+import net.createmod.catnip.render.CachedBuffers;
+import net.createmod.catnip.render.SuperByteBuffer;
+import net.createmod.catnip.utility.AnimationTickHolder;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
@@ -28,7 +28,7 @@ public class PhysEntityTrackRenderer extends KineticBlockEntityRenderer<PhysEnti
                               int light, int overlay) {
         super.renderSafe(be, partialTicks, ms, buffer, light, overlay);
 
-        if (Backend.canUseInstancing(be.getLevel())) {
+        if (VisualizationManager.supportsVisualization(be.getLevel())) {
             BlockState state = getRenderedBlockState(be);
             RenderType type = getRenderType(be, state);
             if (type != null)
@@ -55,9 +55,9 @@ public class PhysEntityTrackRenderer extends KineticBlockEntityRenderer<PhysEnti
 
 //        SuperByteBuffer cogs = CachedBufferer.partial(TrackworkPartialModels.COGS, state);
         SuperByteBuffer cogs = be.getWheelRadius() < 0.6f ?
-                CachedBufferer.partial(TrackworkPartialModels.COGS, state) :
-                be.getWheelRadius() > 0.8f ? CachedBufferer.partial(TrackworkPartialModels.LARGE_COGS, state) :
-                    CachedBufferer.partial(TrackworkPartialModels.MED_COGS, state);
+                CachedBuffers.partial(TrackworkPartialModels.COGS, state) :
+                be.getWheelRadius() > 0.8f ? CachedBuffers.partial(TrackworkPartialModels.LARGE_COGS, state) :
+                    CachedBuffers.partial(TrackworkPartialModels.MED_COGS, state);
         cogs.centre()
                 .rotateY(trackAxis == Direction.Axis.X ? 0 : 90)
                 .rotateX(-angleForBE)

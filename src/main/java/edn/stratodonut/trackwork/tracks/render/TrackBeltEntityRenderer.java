@@ -5,8 +5,8 @@ import edn.stratodonut.trackwork.tracks.TrackBeltEntity;
 import edn.stratodonut.trackwork.tracks.blocks.TrackBaseBlock;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.AllPartialModels;
-import com.simibubi.create.foundation.render.CachedBufferer;
-import com.simibubi.create.foundation.render.SuperByteBuffer;
+import net.createmod.catnip.render.CachedBuffers;
+import net.createmod.catnip.render.SuperByteBuffer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -54,7 +54,7 @@ public class TrackBeltEntityRenderer extends EntityRenderer<TrackBeltEntity> {
 
     public static List<SuperByteBuffer> drawTrackPoint(ITrackPointProvider track, BlockState state, float partialTicks) {
         List<SuperByteBuffer> result = new ArrayList<>();
-        SuperByteBuffer base = CachedBufferer.partial(AllPartialModels.BELT_MIDDLE, state);
+        SuperByteBuffer base = CachedBuffers.partial(AllPartialModels.BELT_MIDDLE, state);
         result.add(base);
 
         switch (track.getTrackPointType()) {
@@ -64,7 +64,7 @@ public class TrackBeltEntityRenderer extends EntityRenderer<TrackBeltEntity> {
 //                result.add(cogs);
             }
             case GROUND -> {
-                SuperByteBuffer cogs = CachedBufferer.partial(AllPartialModels.BELT_MIDDLE_BOTTOM, state);
+                SuperByteBuffer cogs = CachedBuffers.partial(AllPartialModels.BELT_MIDDLE_BOTTOM, state);
                 cogs.translate(0, -1 - track.getPointDownwardOffset(partialTicks), 0);
                 result.add(cogs);
             }

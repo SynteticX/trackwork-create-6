@@ -2,13 +2,13 @@ package edn.stratodonut.trackwork.tracks.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntityRenderer;
-import com.simibubi.create.foundation.render.CachedBufferer;
-import com.simibubi.create.foundation.render.SuperByteBuffer;
-import com.simibubi.create.foundation.utility.AnimationTickHolder;
 import edn.stratodonut.trackwork.TrackworkConfigs;
 import edn.stratodonut.trackwork.client.TrackworkPartialModels;
 import edn.stratodonut.trackwork.tracks.blocks.WheelBlock;
 import edn.stratodonut.trackwork.tracks.blocks.WheelBlockEntity;
+import net.createmod.catnip.render.CachedBuffers;
+import net.createmod.catnip.render.SuperByteBuffer;
+import net.createmod.catnip.utility.AnimationTickHolder;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
@@ -62,9 +62,9 @@ public class SimpleWheelRenderer extends KineticBlockEntityRenderer<WheelBlockEn
         float wheelTravel = be.getWheelTravel(partialTicks) - be.getWheelRadius();
         double wheelTuck = Math.sqrt(2.25 - Math.min(1, wheelTravel*wheelTravel)) - 1.5 - axialOffset;
         
-        ribTransform(CachedBufferer.partial(TrackworkPartialModels.SIMPLE_WHEEL_RIB, state), yRot, wheelTravel, ms, buffer, light,
+        ribTransform(CachedBuffers.partial(TrackworkPartialModels.SIMPLE_WHEEL_RIB, state), yRot, wheelTravel, ms, buffer, light,
                 new Vec3(horizontalOffset * -axisMult, 0, axialOffset), springFlip);
-        ribTransform(CachedBufferer.partial(TrackworkPartialModels.SIMPLE_WHEEL_RIB_UPPER, state), yRot, wheelTravel, ms, buffer, light,
+        ribTransform(CachedBuffers.partial(TrackworkPartialModels.SIMPLE_WHEEL_RIB_UPPER, state), yRot, wheelTravel, ms, buffer, light,
                 new Vec3(horizontalOffset * -axisMult, -9/16f, axialOffset), false);
 
 //        19.5
@@ -90,7 +90,7 @@ public class SimpleWheelRenderer extends KineticBlockEntityRenderer<WheelBlockEn
             float springAngle = (float) (Math.toDegrees(Math.asin((springEndPointLength * Math.sin(Math.PI/2 + ribAngle
                     - diagonalRibOffset)) / scaleLength) + diagonalSpringOffset - Math.PI/2));
             
-            SuperByteBuffer springBase = CachedBufferer.partial(TrackworkPartialModels.SIMPLE_WHEEL_SPRING_BASE, state);
+            SuperByteBuffer springBase = CachedBuffers.partial(TrackworkPartialModels.SIMPLE_WHEEL_SPRING_BASE, state);
             springBase.centre().rotateY(-yRot);
             springTransform.accept(springBase, 0f);
             springBase.translate((springFlip ? 12/16f : 0) + horizontalOffset * -axisMult, 0, axialOffset)
@@ -98,7 +98,7 @@ public class SimpleWheelRenderer extends KineticBlockEntityRenderer<WheelBlockEn
             springBase.renderInto(ms, buffer.getBuffer(RenderType.solid()));
 
 //        float springScale = (0.6f * wheelTravel + 1f) / (13.5f/16);
-            SuperByteBuffer springCoil = CachedBufferer.partial(TrackworkPartialModels.SIMPLE_WHEEL_SPRING_COIL, state);
+            SuperByteBuffer springCoil = CachedBuffers.partial(TrackworkPartialModels.SIMPLE_WHEEL_SPRING_COIL, state);
             springCoil.centre().rotateY(-yRot);
             springTransform.accept(springCoil, springAngle);
             springCoil
@@ -111,8 +111,8 @@ public class SimpleWheelRenderer extends KineticBlockEntityRenderer<WheelBlockEn
 
         {
             SuperByteBuffer wheels = be.getWheelRadius() > 0.8f ? 
-                    CachedBufferer.partial(TrackworkPartialModels.SIMPLE_WHEEL, state) :
-                    CachedBufferer.partial(TrackworkPartialModels.MED_SIMPLE_WHEEL, state);
+                    CachedBuffers.partial(TrackworkPartialModels.SIMPLE_WHEEL, state) :
+                    CachedBuffers.partial(TrackworkPartialModels.MED_SIMPLE_WHEEL, state);
             wheels.centre()
                     .rotateY(-yRot + be.getSteeringValue() * 30)
 //                    .translate(0, be.getWheelRadius() , 0)

@@ -3,15 +3,15 @@ package edn.stratodonut.trackwork.tracks.render;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.simibubi.create.content.kinetics.base.RotatedPillarKineticBlock;
-import com.simibubi.create.foundation.block.render.SpriteShiftEntry;
-import com.simibubi.create.foundation.render.CachedBufferer;
-import com.simibubi.create.foundation.render.SuperByteBuffer;
-import com.simibubi.create.foundation.utility.AnimationTickHolder;
 import edn.stratodonut.trackwork.client.TrackworkPartialModels;
 import edn.stratodonut.trackwork.client.TrackworkSpriteShifts;
 import edn.stratodonut.trackwork.tracks.ITrackPointProvider;
 import edn.stratodonut.trackwork.tracks.blocks.TrackBaseBlock;
 import edn.stratodonut.trackwork.tracks.blocks.TrackBaseBlockEntity;
+import net.createmod.catnip.render.CachedBuffers;
+import net.createmod.catnip.render.SpriteShiftEntry;
+import net.createmod.catnip.render.SuperByteBuffer;
+import net.createmod.catnip.utility.AnimationTickHolder;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Direction;
@@ -70,7 +70,7 @@ public class TrackBeltRenderer {
                     .unCentre();
             topLink.light(light).renderInto(ms, buf.getBuffer(RenderType.solid()));
 
-            SuperByteBuffer wrapLink = CachedBufferer.partial(TrackworkPartialModels.TRACK_WRAP, state);
+            SuperByteBuffer wrapLink = CachedBuffers.partial(TrackworkPartialModels.TRACK_WRAP, state);
             wrapLink.centre()
                     .rotateY(yRot)
                     .scale(1, largeScale,largeScale)
@@ -146,7 +146,7 @@ public class TrackBeltRenderer {
     }
 
     private static SuperByteBuffer getLink(BlockState state) {
-        return CachedBufferer.partial(TrackworkPartialModels.TRACK_LINK, state);
+        return CachedBuffers.partial(TrackworkPartialModels.TRACK_LINK, state);
     }
 
     public static Direction getAlong(BlockState state) {

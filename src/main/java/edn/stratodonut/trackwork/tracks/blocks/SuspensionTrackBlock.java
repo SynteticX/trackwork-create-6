@@ -1,7 +1,7 @@
 package edn.stratodonut.trackwork.tracks.blocks;
 
 import com.simibubi.create.AllItems;
-import com.simibubi.create.foundation.utility.Lang;
+import net.createmod.catnip.utility.lang.Lang;
 import edn.stratodonut.trackwork.TrackBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

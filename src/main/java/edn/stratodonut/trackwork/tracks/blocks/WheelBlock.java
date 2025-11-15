@@ -3,7 +3,7 @@ package edn.stratodonut.trackwork.tracks.blocks;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.content.kinetics.base.HorizontalKineticBlock;
 import com.simibubi.create.foundation.block.IBE;
-import com.simibubi.create.foundation.utility.Lang;
+import net.createmod.catnip.utility.lang.Lang;
 import edn.stratodonut.trackwork.TrackBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

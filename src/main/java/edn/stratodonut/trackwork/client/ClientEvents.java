@@ -1,10 +1,7 @@
 package edn.stratodonut.trackwork.client;
 
-import static com.jozufozu.flywheel.backend.Backend.isGameActive;
-
 import edn.stratodonut.trackwork.sounds.TrackSoundScapes;
 import net.minecraft.client.Minecraft;
-import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterClientReloadListenersEvent;
 import net.minecraftforge.event.TickEvent;
@@ -17,11 +14,8 @@ public class ClientEvents {
 
     @SubscribeEvent
     public static void onTick(TickEvent.ClientTickEvent event) {
-        if (!isGameActive())
-            return;
-
-        Level world = Minecraft.getInstance().level;
-        if (event.phase == TickEvent.Phase.START) {
+        Minecraft minecraft = Minecraft.getInstance();
+        if (minecraft.level == null || event.phase == TickEvent.Phase.START) {
             return;
         }
 

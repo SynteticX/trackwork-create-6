@@ -1,6 +1,6 @@
 package edn.stratodonut.trackwork.sounds;
 
-import com.simibubi.create.foundation.utility.AnimationTickHolder;
+import net.createmod.catnip.utility.AnimationTickHolder;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;

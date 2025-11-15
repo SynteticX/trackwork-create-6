@@ -1,9 +1,9 @@
 package edn.stratodonut.trackwork.tracks;
 
-import com.simibubi.create.foundation.ponder.PonderPalette;
-import com.simibubi.create.foundation.ponder.SceneBuilder;
-import com.simibubi.create.foundation.ponder.SceneBuildingUtil;
 import edn.stratodonut.trackwork.tracks.blocks.WheelBlockEntity;
+import net.createmod.ponder.api.PonderPalette;
+import net.createmod.ponder.api.scene.SceneBuilder;
+import net.createmod.ponder.api.scene.SceneBuildingUtil;
 import net.minecraft.core.Direction;
 
 public class TrackPonderScenes {

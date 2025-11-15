@@ -12,9 +12,9 @@ import java.util.Set;
 
 import org.valkyrienskies.mod.common.VSGameUtilsKt;
 
-import com.simibubi.create.foundation.utility.AnimationTickHolder;
-import com.simibubi.create.foundation.utility.Pair;
 import com.simibubi.create.infrastructure.config.AllConfigs;
+import net.createmod.catnip.utility.AnimationTickHolder;
+import net.createmod.catnip.utility.Pair;
 
 import edn.stratodonut.trackwork.TrackworkConfigs;
 import net.minecraft.client.Minecraft;

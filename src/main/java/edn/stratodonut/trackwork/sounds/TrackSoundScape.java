@@ -5,9 +5,9 @@ import java.util.List;
 
 import org.valkyrienskies.mod.common.VSGameUtilsKt;
 
-import com.simibubi.create.foundation.utility.AnimationTickHolder;
-import com.simibubi.create.foundation.utility.VecHelper;
 import com.simibubi.create.infrastructure.config.AllConfigs;
+import net.createmod.catnip.utility.AnimationTickHolder;
+import net.createmod.catnip.utility.VecHelper;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;

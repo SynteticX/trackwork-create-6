@@ -2,7 +2,7 @@ package edn.stratodonut.trackwork.tracks.blocks;
 
 import com.mojang.datafixers.util.Pair;
 import com.simibubi.create.foundation.sound.SoundScapes;
-import com.simibubi.create.foundation.utility.Lang;
+import net.createmod.catnip.utility.lang.Lang;
 import edn.stratodonut.trackwork.*;
 import edn.stratodonut.trackwork.sounds.TrackSoundScapes;
 import edn.stratodonut.trackwork.tracks.ITrackPointProvider;
