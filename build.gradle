@@ -135,14 +135,16 @@ mixin {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
-    // Put repositories for dependencies here
-    // ForgeGradle automatically adds the Forge maven and Maven Central for you
     mavenCentral()
 
     maven {
         name = 'MinecraftForge'
         url = 'https://maven.minecraftforge.net/'
     }
+
+    maven { url = "https://maven.createmod.net" } // Create, Ponder, Flywheel
+    maven { url = "https://maven.ithundxr.dev/mirror" } // Registrate
+    maven { url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/" } // ForgeConfigAPIPort
 
     maven {
         url "https://maven.squiddev.cc"
@@ -162,8 +164,6 @@ repositories {
         url = "https://maven.theillusivec4.top/"
     }
 
-    maven { url = 'https://maven.tterrag.com/'}
-
     // Add KFF Maven repository
     maven {
         name = 'Kotlin for Forge'
@@ -174,36 +174,32 @@ repositories {
         name = "Valkyrien Skies Internal"
         url = 'https://maven.valkyrienskies.org'
     }
-
-    // If you have mod jar dependencies in ./libs, you can declare them as a repository like so.
-    // See https://docs.gradle.org/current/userguide/declaring_repositories.html#sub:flat_dir_resolver
-    // flatDir {
-    //     dir 'libs'
-    // }
 }
 
 dependencies {
     // Specify the version of Minecraft to use.
     // Any artifact can be supplied so long as it has a "userdev" classifier artifact and is a compatible patcher artifact.
     // The "userdev" classifier will be requested and setup by ForgeGradle.
+    // If the group id is "net.minecraft" and the artifact id is one of ["client", "server", "joined"],
+    // then special handling is done to allow a setup of a vanilla dependency without the use of an external repository.
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
-    implementation fg.deobf("com.tterrag.registrate:Registrate:${registrate_version}")
-
-    jarJar(group: 'com.tterrag.registrate', name: 'Registrate', version: "[MC1.19.3,MC1.20)")
-
-    jarJar("com.jozufozu.flywheel:flywheel-forge-${minecraft_version}:${flywheel_version}") {
-        jarJar.ranged(it, '[0.6.10,0.6.12)')
+    implementation(fg.deobf("com.simibubi.create:create-${minecraft_version}:${create_version}:slim") { transitive = false })
+    implementation fg.deobf("net.createmod.catnip:Catnip-Forge-${minecraft_version}:${catnip_version}") {
+        transitive = false
     }
-
-    implementation fg.deobf("com.simibubi.create:create-${minecraft_version}:${create_version}")
-    implementation fg.deobf("com.jozufozu.flywheel:flywheel-forge-${minecraft_version}:${flywheel_version}")
+    implementation(fg.deobf("net.createmod.ponder:Ponder-Forge-${minecraft_version}:${ponder_version}"))
+    compileOnly(fg.deobf("dev.engine-room.flywheel:flywheel-forge-api-${minecraft_version}:${flywheel_version}"))
+    runtimeOnly(fg.deobf("dev.engine-room.flywheel:flywheel-forge-${minecraft_version}:${flywheel_version}"))
+    implementation(fg.deobf("com.tterrag.registrate:Registrate:${registrate_version}"))
+    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.4.1"))
+    implementation("io.github.llamalad7:mixinextras-forge:0.4.1")
 
     implementation         ("org.valkyrienskies.core:api:${vs_core_version}")
     implementation         ("org.valkyrienskies.core:impl:${vs_core_version}")
     implementation         ("org.valkyrienskies.core:api-game:${vs_core_version}")
     implementation         ("org.valkyrienskies.core:util:${vs_core_version}")
-    implementation fg.deobf("org.valkyrienskies:valkyrienskies-120-forge:${vs2_version}")
+    implementation fg.deobf("org.valkyrienskies:valkyrienskies-120-forge:2.3.0-beta.11") { transitive = false }
 
     implementation 'thedarkcolour:kotlinforforge:4.10.0'
 
