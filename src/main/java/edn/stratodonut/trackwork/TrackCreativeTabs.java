@@ -3,9 +3,9 @@ package edn.stratodonut.trackwork;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllCreativeModeTabs;
 import com.simibubi.create.foundation.data.CreateRegistrate;
-import net.createmod.catnip.utility.lang.Components;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -22,7 +22,7 @@ public class TrackCreativeTabs {
 
     public static final RegistryObject<CreativeModeTab> BASE_CREATIVE_TAB = REGISTER.register("base",
             () -> CreativeModeTab.builder()
-                    .title(Components.translatable("itemGroup.trackwork"))
+                    .title(Component.translatable("itemGroup.trackwork"))
                     .icon(AllBlocks.BELT::asStack)
                     .displayItems((displayParams, output) -> {
                         for (RegistryEntry<Block> entry : REGISTRATE.getAll(Registries.BLOCK)) {

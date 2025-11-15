@@ -3,10 +3,9 @@ package edn.stratodonut.trackwork;
 import com.mojang.logging.LogUtils;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.item.ItemDescription;
-import com.simibubi.create.foundation.item.TooltipHelper;
-
 import edn.stratodonut.trackwork.client.TrackworkPartialModels;
 import edn.stratodonut.trackwork.client.TrackworkSpriteShifts;
+import net.createmod.catnip.lang.FontHelper;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -29,7 +28,7 @@ public class TrackworkMod
 
     static {
         REGISTRATE.setTooltipModifierFactory(item ->
-                new ItemDescription.Modifier(item, TooltipHelper.Palette.STANDARD_CREATE));
+                new ItemDescription.Modifier(item, FontHelper.Palette.STANDARD_CREATE));
     }
 
     public TrackworkMod() { onCtor(); }

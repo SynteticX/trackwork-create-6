@@ -2,7 +2,7 @@ package edn.stratodonut.trackwork.tracks.blocks;
 
 import com.mojang.datafixers.util.Pair;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
-import net.createmod.catnip.utility.Iterate;
+import net.createmod.catnip.data.Iterate;
 import edn.stratodonut.trackwork.TrackPackets;
 import edn.stratodonut.trackwork.TrackworkUtil;
 import edn.stratodonut.trackwork.tracks.ITrackPointProvider;

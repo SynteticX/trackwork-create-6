@@ -13,8 +13,8 @@ import java.util.Set;
 import org.valkyrienskies.mod.common.VSGameUtilsKt;
 
 import com.simibubi.create.infrastructure.config.AllConfigs;
-import net.createmod.catnip.utility.AnimationTickHolder;
-import net.createmod.catnip.utility.Pair;
+import net.createmod.catnip.animation.AnimationTickHolder;
+import net.createmod.catnip.data.Pair;
 
 import edn.stratodonut.trackwork.TrackworkConfigs;
 import net.minecraft.client.Minecraft;

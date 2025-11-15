@@ -2,7 +2,7 @@ package edn.stratodonut.trackwork.tracks.blocks;
 
 import com.mojang.datafixers.util.Pair;
 import com.simibubi.create.foundation.sound.SoundScapes;
-import net.createmod.catnip.utility.lang.Lang;
+import net.createmod.catnip.lang.Lang;
 import edn.stratodonut.trackwork.*;
 import edn.stratodonut.trackwork.sounds.TrackSoundScapes;
 import edn.stratodonut.trackwork.tracks.ITrackPointProvider;
@@ -287,11 +287,13 @@ public class PhysEntityTrackBlockEntity extends TrackBaseBlockEntity implements 
 //    }
 
     public void addMassStats(List<Component> tooltip, float mass) {
-        Lang.text("Total Mass")
+        Lang.builder(TrackworkMod.MOD_ID)
+                .text("Total Mass")
                 .style(GRAY)
                 .forGoggles(tooltip);
 
-        Lang.number(mass)
+        Lang.builder(TrackworkMod.MOD_ID)
+                .text(String.format("%.2f", mass))
                 .text(" kg")
                 .style(ChatFormatting.WHITE)
 //                .space()

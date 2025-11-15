@@ -9,10 +9,10 @@ import edn.stratodonut.trackwork.tracks.blocks.WheelBlock;
 import edn.stratodonut.trackwork.tracks.blocks.WheelBlockEntity;
 import edn.stratodonut.trackwork.tracks.forces.PhysicsTrackController;
 import edn.stratodonut.trackwork.tracks.forces.SimpleWheelController;
-import net.createmod.catnip.utility.lang.Components;
-import net.createmod.catnip.utility.lang.Lang;
+import net.createmod.catnip.lang.Lang;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.InteractionHand;
@@ -110,8 +110,8 @@ public class TrackToolkit extends Item {
                             PhysicsTrackController controller = PhysicsTrackController.getOrCreate((ServerShip) ship);
                             float result = controller.setDamperCoefficient(isSneaking ? -1f : 1f);
 
-                            MutableComponent chatMessage = Lang.text("Adjusted suspension stiffness to ")
-                                    .add(Components.literal(String.format("%.2fx", result))).component();
+                            MutableComponent chatMessage = Component.literal("Adjusted suspension stiffness to ")
+                                    .append(Component.literal(String.format("%.2fx", result)));
 
                             player.displayClientMessage(chatMessage, true);
                         }
@@ -124,8 +124,8 @@ public class TrackToolkit extends Item {
                             SimpleWheelController controller = SimpleWheelController.getOrCreate((ServerShip) ship);
                             float result = controller.setDamperCoefficient(isSneaking ? -1f : 1f);
 
-                            MutableComponent chatMessage = Lang.text("Adjusted suspension stiffness to ")
-                                    .add(Components.literal(String.format("%.2fx", result))).component();
+                            MutableComponent chatMessage = Component.literal("Adjusted suspension stiffness to ")
+                                    .append(Component.literal(String.format("%.2fx", result)));
 
                             player.displayClientMessage(chatMessage, true);
                         }

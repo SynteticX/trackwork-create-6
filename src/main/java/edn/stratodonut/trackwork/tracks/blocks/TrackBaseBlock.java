@@ -1,14 +1,12 @@
 package edn.stratodonut.trackwork.tracks.blocks;
 
-import com.simibubi.create.content.contraptions.ITransformableBlock;
-import com.simibubi.create.content.contraptions.StructureTransform;
 import com.simibubi.create.content.kinetics.base.DirectionalAxisKineticBlock;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.simibubi.create.content.kinetics.base.RotatedPillarKineticBlock;
 import com.simibubi.create.content.kinetics.chainDrive.ChainGearshiftBlockEntity;
 import com.simibubi.create.foundation.block.IBE;
-import net.createmod.catnip.utility.Iterate;
-import net.createmod.catnip.utility.lang.Lang;
+import net.createmod.catnip.data.Iterate;
+import net.createmod.catnip.lang.Lang;
 import edn.stratodonut.trackwork.TrackworkConfigs;
 import edn.stratodonut.trackwork.tracks.ITrackPointProvider;
 import net.minecraft.core.BlockPos;
@@ -29,7 +27,7 @@ import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class TrackBaseBlock<BE extends TrackBaseBlockEntity> extends RotatedPillarKineticBlock implements ITransformableBlock, IBE<BE> {
+public abstract class TrackBaseBlock<BE extends TrackBaseBlockEntity> extends RotatedPillarKineticBlock implements IBE<BE> {
 
     public static final Property<TrackPart> PART = EnumProperty.create("part", TrackPart.class);
     public static final BooleanProperty CONNECTED_ALONG_FIRST_COORDINATE =
@@ -255,9 +253,5 @@ public abstract class TrackBaseBlock<BE extends TrackBaseBlockEntity> extends Ro
         return pState;
     }
 
-    @Override
-    public BlockState transform(BlockState state, StructureTransform transform) {
-        return rotate(mirror(state, transform.mirror), transform.rotation, transform.rotationAxis);
-    }
 }
 

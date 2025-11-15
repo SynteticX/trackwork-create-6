@@ -10,7 +10,7 @@ import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntityRenderer;
 import net.createmod.catnip.render.CachedBuffers;
 import net.createmod.catnip.render.SuperByteBuffer;
-import net.createmod.catnip.utility.AnimationTickHolder;
+import net.createmod.catnip.animation.AnimationTickHolder;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
@@ -57,14 +57,14 @@ public class SuspensionRenderer extends KineticBlockEntityRenderer<SuspensionTra
                     ? CachedBuffers.partial(TrackworkPartialModels.SUSPENSION_WHEEL, state) :
                     be.getWheelRadius() > 0.8f ? CachedBuffers.partial(TrackworkPartialModels.LARGE_SUSPENSION_WHEEL, state) :
                     CachedBuffers.partial(TrackworkPartialModels.MED_SUSPENSION_WHEEL, state);
-            wheels.centre()
+            wheels.center()
                     .rotateY(yRot)
                     .translate(0, be.getWheelRadius() - 0.5, 0)
                     .translate(0, -be.getWheelTravel(partialTicks), be.getPointHorizontalOffset())
                     .rotateX(-angleForBE)
 //                    .scale(1, be.getWheelRadius() / 0.5f, be.getWheelRadius() / 0.5f)
                     .translate(0, 9 / 16f, 0)
-                    .unCentre();
+                    .uncenter();
 
             wheels.light(light)
                     .renderInto(ms, buffer.getBuffer(RenderType.solid()));
@@ -74,7 +74,7 @@ public class SuspensionRenderer extends KineticBlockEntityRenderer<SuspensionTra
     }
 
     public static float getAngleForBE(KineticBlockEntity be, final BlockPos pos, Direction.Axis axis) {
-        float time = AnimationTickHolder.getRenderTime(be.getLevel());
+        float time = AnimationTickHolder.getRenderTime();
         float offset = getRotationOffsetForPosition(be, pos, axis);
         return (time * be.getSpeed() * 3f / 10 + offset) % 360;
     }

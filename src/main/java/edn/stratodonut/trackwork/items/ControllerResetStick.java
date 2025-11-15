@@ -1,8 +1,7 @@
 package edn.stratodonut.trackwork.items;
 
 import edn.stratodonut.trackwork.tracks.forces.PhysEntityTrackController;
-import net.createmod.catnip.utility.lang.Lang;
-import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -33,8 +32,7 @@ public class ControllerResetStick extends Item {
             PhysEntityTrackController controller = PhysEntityTrackController.getOrCreate((ServerShip) ship);
             controller.resetController();
 
-            MutableComponent chatMessage = Lang.text("Fix! ").component();
-            player.displayClientMessage(chatMessage, true);
+            player.displayClientMessage(Component.literal("Fix!"), true);
         }
 
         return InteractionResult.SUCCESS;

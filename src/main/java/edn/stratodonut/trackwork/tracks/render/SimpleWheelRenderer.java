@@ -8,7 +8,7 @@ import edn.stratodonut.trackwork.tracks.blocks.WheelBlock;
 import edn.stratodonut.trackwork.tracks.blocks.WheelBlockEntity;
 import net.createmod.catnip.render.CachedBuffers;
 import net.createmod.catnip.render.SuperByteBuffer;
-import net.createmod.catnip.utility.AnimationTickHolder;
+import net.createmod.catnip.animation.AnimationTickHolder;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
@@ -91,21 +91,21 @@ public class SimpleWheelRenderer extends KineticBlockEntityRenderer<WheelBlockEn
                     - diagonalRibOffset)) / scaleLength) + diagonalSpringOffset - Math.PI/2));
             
             SuperByteBuffer springBase = CachedBuffers.partial(TrackworkPartialModels.SIMPLE_WHEEL_SPRING_BASE, state);
-            springBase.centre().rotateY(-yRot);
+            springBase.center().rotateY(-yRot);
             springTransform.accept(springBase, 0f);
             springBase.translate((springFlip ? 12/16f : 0) + horizontalOffset * -axisMult, 0, axialOffset)
-                    .unCentre();
+                    .uncenter();
             springBase.renderInto(ms, buffer.getBuffer(RenderType.solid()));
 
 //        float springScale = (0.6f * wheelTravel + 1f) / (13.5f/16);
             SuperByteBuffer springCoil = CachedBuffers.partial(TrackworkPartialModels.SIMPLE_WHEEL_SPRING_COIL, state);
-            springCoil.centre().rotateY(-yRot);
+            springCoil.center().rotateY(-yRot);
             springTransform.accept(springCoil, springAngle);
             springCoil
                     .translate((springFlip ? 12/16f : 0) + horizontalOffset * -axisMult, 7/16f, axialOffset)
                     .scale(1, (float) scaleLength / (17f/16), 1)
                     .translate(0, -7/16f, 0)
-                    .unCentre();
+                    .uncenter();
             springCoil.renderInto(ms, buffer.getBuffer(RenderType.cutout()));
         }
 
@@ -113,13 +113,13 @@ public class SimpleWheelRenderer extends KineticBlockEntityRenderer<WheelBlockEn
             SuperByteBuffer wheels = be.getWheelRadius() > 0.8f ? 
                     CachedBuffers.partial(TrackworkPartialModels.SIMPLE_WHEEL, state) :
                     CachedBuffers.partial(TrackworkPartialModels.MED_SIMPLE_WHEEL, state);
-            wheels.centre()
+            wheels.center()
                     .rotateY(-yRot + be.getSteeringValue() * 30)
 //                    .translate(0, be.getWheelRadius() , 0)
                     .translate(horizontalOffset * -axisMult, -wheelTravel - 0.5, -wheelTuck)
                     .rotateZ(-angleForBE)
 //                    .translate(0, 8 / 16f, 0)
-                    .unCentre();
+                    .uncenter();
 
             wheels.light(light)
                     .renderInto(ms, buffer.getBuffer(RenderType.cutout()));
@@ -128,18 +128,18 @@ public class SimpleWheelRenderer extends KineticBlockEntityRenderer<WheelBlockEn
 
     public static void ribTransform(SuperByteBuffer rib, float yRot, float wheelTravel, PoseStack ms, MultiBufferSource buffer, int light,
                                     Vec3 offset, boolean flip) {
-        rib.centre()
+        rib.center()
                 .rotateY(-yRot)
                 .translate(offset.x, -8/16f - offset.y, 1.5 + offset.z)
-                .rotateX(-Math.toDegrees(Math.atan((wheelTravel + 0.3f) / 1.1)))
+                .rotateX((float) -Math.toDegrees(Math.atan((wheelTravel + 0.3f) / 1.1)))
                 .translate(0, 8/16f + offset.y, -1.375)
-                .unCentre();
+                .uncenter();
         rib.light(light).renderInto(ms, buffer.getBuffer(RenderType.solid()));
     }
 
     public static float getAngleForBE(WheelBlockEntity be, final BlockPos pos, Direction.Axis axis, float partialTick) {
         if (be.isFreespin) return be.getFreeWheelAngle(partialTick);
-        float time = AnimationTickHolder.getRenderTime(be.getLevel());
+        float time = AnimationTickHolder.getRenderTime();
         float offset = getRotationOffsetForPosition(be, pos, axis);
         return (time * be.getWheelSpeed() * 3f / 10 + offset) % 360;
     }

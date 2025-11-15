@@ -10,7 +10,7 @@ import com.simibubi.create.content.kinetics.base.KineticBlockEntityRenderer;
 import dev.engine_room.flywheel.api.visualization.VisualizationManager;
 import net.createmod.catnip.render.CachedBuffers;
 import net.createmod.catnip.render.SuperByteBuffer;
-import net.createmod.catnip.utility.AnimationTickHolder;
+import net.createmod.catnip.animation.AnimationTickHolder;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
@@ -58,12 +58,12 @@ public class PhysEntityTrackRenderer extends KineticBlockEntityRenderer<PhysEnti
                 CachedBuffers.partial(TrackworkPartialModels.COGS, state) :
                 be.getWheelRadius() > 0.8f ? CachedBuffers.partial(TrackworkPartialModels.LARGE_COGS, state) :
                     CachedBuffers.partial(TrackworkPartialModels.MED_COGS, state);
-        cogs.centre()
+        cogs.center()
                 .rotateY(trackAxis == Direction.Axis.X ? 0 : 90)
                 .rotateX(-angleForBE)
 //                .scale(1, be.getWheelRadius() / 0.5f, be.getWheelRadius() / 0.5f)
                 .translate(0, 9 / 16f, 0)
-                .unCentre();
+                .uncenter();
 
         cogs.light(light)
                 .renderInto(ms, buffer.getBuffer(RenderType.solid()));
@@ -72,7 +72,7 @@ public class PhysEntityTrackRenderer extends KineticBlockEntityRenderer<PhysEnti
     }
 
     public static float getAngleForBE(KineticBlockEntity be, final BlockPos pos, Direction.Axis axis) {
-        float time = AnimationTickHolder.getRenderTime(be.getLevel());
+        float time = AnimationTickHolder.getRenderTime();
         float offset = getRotationOffsetForPosition(be, pos, axis);
         return (time * be.getSpeed() * 3f / 10 + offset) % 360;
     }

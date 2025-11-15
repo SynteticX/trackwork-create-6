@@ -1,7 +1,5 @@
 package edn.stratodonut.trackwork;
 
-import com.simibubi.create.content.kinetics.base.ShaftInstance;
-import com.simibubi.create.content.kinetics.base.ShaftRenderer;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
 import edn.stratodonut.trackwork.blocks.TrackAdjusterBlockEntity;
 import edn.stratodonut.trackwork.tracks.blocks.PhysEntityTrackBlockEntity;
@@ -68,9 +66,7 @@ public class TrackBlockEntityTypes {
 
     public static final BlockEntityEntry<TrackAdjusterBlockEntity> TRACK_LEVEL_CONTROLLER = REGISTRATE
             .blockEntity("track_level_controller", TrackAdjusterBlockEntity::new)
-            .instance(() -> ShaftInstance::new)
             .validBlocks(TrackBlocks.TRACK_LEVEL_CONTROLLER)
-            .renderer(() -> ShaftRenderer::new)
             .register();
 
     public static void register() {}
